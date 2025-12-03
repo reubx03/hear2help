@@ -1,0 +1,55 @@
+# ============================
+# Python Ignored Files
+# ============================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Cache / build folders
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook stuff (if any)
+.ipynb_checkpoints/
+
+# =================================
+# Project Specific Ignored Folders
+# =================================
+
+# Audio recordings (raw input files)
+audio/
+
+# Temporary logs/output files
+*.log
+*.tmp
+
+# Model / data dump (optional if using AI models)
+models/
+checkpoints/
+datasets/
+
+# =================================
+# Environment / Security
+# =================================
+
+# Credentials
+*.env
+*.ini
+*.cfg
+
+# VSCode / Editor configs
+.vscode/
+.idea/
+
+# OS system files
+.DS_Store
+Thumbs.db
