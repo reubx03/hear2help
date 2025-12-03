@@ -1,4 +1,4 @@
-# **Railway Assistant**
+# **Hear2Help**
 
 ## **Folder Structure**
 
@@ -68,3 +68,4 @@ You are modifying a module inside a modular AI pipeline.
 3. Add improvements internally (real STT, NLP, API calls, TTS, caching etc.).  
 4. Use clean logging for debugging.  
 5. Do not break the pipeline flow.
+
