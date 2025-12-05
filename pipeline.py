@@ -24,7 +24,7 @@ class AssistantPipeline:
         lang = self.speech.detect_language(audio_path)
         text = self.speech.speech_to_text(audio_path, lang)
         english_text = self.speech.translate_to_english(text)
-
+        
         intent = self.nlp.extract_intent(english_text)
         entities = self.nlp.extract_entities(english_text)
 
