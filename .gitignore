@@ -27,6 +27,7 @@ build/
 
 # Audio recordings (raw input files)
 audio/
+tts_output/
 
 # Temporary logs/output files
 *.log
