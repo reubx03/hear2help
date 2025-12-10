@@ -28,9 +28,21 @@ class AssistantPipeline:
         intent = self.nlp.extract_intent(english_text)
         entities = self.nlp.extract_entities(english_text)
 
-        result = self.nlp.route_intent(intent, entities)
-        response = self.nlp.format_response(result)
-
+        # Step 1: NLP decides what the user wants
+        request = self.nlp.route_intent(intent, entities)
+        
+        # Step 2: Train service processes the request
+        service_result = self.train_api.execute(request)
+        
+        # Step 3: Format final text response
+        response = self.nlp.format_response(service_result)
+        
         final_text = self.output.translate_back(response, lang)
 
-        return final_text
+        # Generate TTS and play it
+        audio_path = self.output.speak(final_text, lang)
+        
+        return {
+            "text": final_text,
+            "audio": audio_path
+        }
