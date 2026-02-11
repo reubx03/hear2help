@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Railway Assistant</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #0b1220;
+      color: white;
+      text-align: center;
+    }
+    button {
+      font-size: 40px;
+      padding: 40px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tap to Speak</h1>
+<button onclick="startListening()">🎤 START</button>
+<p id="status"></p>
+<p id="output"></p>
+
+<script>
+let recorder, audioChunks = [];
+
+async function startListening() {
+  document.getElementById("status").innerText = "Listening...";
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+  recorder = new MediaRecorder(stream);
+  audioChunks = [];
+
+  recorder.ondataavailable = e => audioChunks.push(e.data);
+
+  recorder.onstop = async () => {
+    const blob = new Blob(audioChunks, { type: 'audio/wav' });
+    const formData = new FormData();
+    formData.append("audio", blob);
+
+    document.getElementById("status").innerText = "Processing...";
+
+    const res = await fetch("/listen", { method: "POST", body: formData });
+    const data = await res.json();
+
+    document.getElementById("output").innerText = data.text;
+
+    const audio = new Audio(data.audio);
+    audio.play();
+  };
+
+  recorder.start();
+
+  // Auto-stop after 6 seconds (tweakable)
+  setTimeout(() => recorder.stop(), 6000);
+}
+</script>
+
+</body>
+</html>
